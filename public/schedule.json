@@ -1,0 +1,122 @@
+[
+  {
+    "id": "thetv-program-0001060543-47-1776095640000",
+    "title": "タイムレスマン",
+    "channel": "青森放送",
+    "datetime": "2026-04-13T15:54:00.000Z",
+    "category": "バラエティー",
+    "role": "出演",
+    "watched": false,
+    "isManual": false
+  },
+  {
+    "id": "thetv-program-0001060543-30-1776139800000",
+    "title": "タイムレスマン",
+    "channel": "東海テレビ",
+    "datetime": "2026-04-14T04:10:00.000Z",
+    "category": "バラエティー",
+    "role": "出演",
+    "watched": false,
+    "isManual": false
+  },
+  {
+    "id": "thetv-program-0001060543-48-1776140520000",
+    "title": "タイムレスマン",
+    "channel": "青森放送",
+    "datetime": "2026-04-14T04:22:00.000Z",
+    "category": "バラエティー",
+    "role": "出演",
+    "watched": false,
+    "isManual": false
+  },
+  {
+    "id": "thetv-program-0001072293-1-1776333600000",
+    "title": "STAR",
+    "channel": "フジテレビ",
+    "datetime": "2026-04-16T10:00:00.000Z",
+    "category": "音楽",
+    "role": "出演",
+    "watched": false,
+    "isManual": false
+  },
+  {
+    "id": "thetv-program-0001060543-45-1776268500000",
+    "title": "タイムレスマン",
+    "channel": "ＥＢＣ",
+    "datetime": "2026-04-15T15:55:00.000Z",
+    "category": "バラエティー",
+    "role": "出演",
+    "watched": false,
+    "isManual": false
+  },
+  {
+    "id": "thetv-program-0001060543-51-1776427200000",
+    "title": "タイムレスマン",
+    "channel": "フジテレビ",
+    "datetime": "2026-04-17T12:00:00.000Z",
+    "category": "バラエティー",
+    "role": "出演",
+    "watched": false,
+    "isManual": false
+  },
+  {
+    "id": "thetv-program-0001071015-6-1776470400000",
+    "title": "第6話 横浜ネイバーズ Season２ 「第６話」",
+    "channel": "WOWOWプライム",
+    "datetime": "2026-04-18T00:00:00.000Z",
+    "category": "ドラマ",
+    "role": "主題歌",
+    "watched": false,
+    "isManual": false
+  },
+  {
+    "id": "thetv-program-0001060543-50-1776456000000",
+    "title": "タイムレスマン",
+    "channel": "OHK",
+    "datetime": "2026-04-17T20:00:00.000Z",
+    "category": "バラエティー",
+    "role": "出演",
+    "watched": false,
+    "isManual": false
+  },
+  {
+    "id": "thetv-program-0001071015-7-1776517200000",
+    "title": "第7話 横浜ネイバーズ Season２ 「第７話」",
+    "channel": "WOWOWプライム",
+    "datetime": "2026-04-18T13:00:00.000Z",
+    "category": "ドラマ",
+    "role": "主題歌",
+    "watched": false,
+    "isManual": false
+  },
+  {
+    "id": "thetv-program-0001065970-25-1776531600000",
+    "title": "timeleszファミリア",
+    "channel": "日本テレビ",
+    "datetime": "2026-04-18T17:00:00.000Z",
+    "category": "バラエティー",
+    "role": "出演",
+    "watched": false,
+    "isManual": false
+  },
+  {
+    "id": "thetv-program-0000979177-176-1776679200000",
+    "title": "CDTVライブ！ライブ！",
+    "channel": "TBS",
+    "datetime": "2026-04-20T10:00:00.000Z",
+    "category": "音楽",
+    "role": "出演",
+    "watched": false,
+    "isManual": false
+  },
+  {
+    "id": "thetv-program-0001037109-114-1776658800000",
+    "title": "クロナダル",
+    "channel": "OAB",
+    "datetime": "2026-04-20T04:20:00.000Z",
+    "category": "バラエティー",
+    "role": "その他",
+    "watched": false,
+    "isManual": false
+  }
+]

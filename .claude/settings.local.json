@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:bangumi.org)",
+      "WebFetch(domain:thetv.jp)",
+      "WebFetch(domain:www.oricon.co.jp)",
+      "Bash(npm create:*)",
+      "Bash(npm install:*)",
+      "Bash(npx tsc:*)",
+      "Bash(npm run:*)",
+      "Bash(npx tsx -e ':*)",
+      "Bash(node:*)",
+      "Bash(python3 -m json.tool)",
+      "Bash(curl -s http://localhost:5173)",
+      "Bash(curl -s http://localhost:5174/api/schedule)",
+      "Bash(python3 -c ':*)",
+      "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); print\\(f'{len\\(d\\)} items'\\); [print\\(f'  {x[\\\\\"title\\\\\"]} | {x[\\\\\"channel\\\\\"]} | {x[\\\\\"datetime\\\\\"]}'\\) for x in d[:5]]\")"
+    ]
+  }
+}
