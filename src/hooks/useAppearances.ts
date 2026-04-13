@@ -1,108 +1,131 @@
-import { useState, useCallback } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { useLocalStorage } from './useLocalStorage'
 import { fetchSchedule } from '../services/scheduleService'
+import {
+  loadAppearances,
+  upsertAppearances,
+  updateWatched,
+  insertAppearance,
+  deleteAppearance,
+} from '../services/appearanceDb'
 import type { TvAppearance } from '../types'
 import { isToday, isFuture, isPast } from '../utils/dateUtils'
 import { isKantoTerrestrial } from '../utils/channelUtils'
 
-const STORAGE_KEY = 'timelesz-appearances'
-
-export function useAppearances() {
-  const [appearances, setAppearances] = useLocalStorage<TvAppearance[]>(STORAGE_KEY, [])
+export function useAppearances(userId: string) {
+  const [appearances, setAppearances] = useState<TvAppearance[]>([])
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [lastFetched, setLastFetched] = useLocalStorage<string | null>('timelesz-last-fetched', null)
 
-  /** 取得データと既存データをマージ（watched 状態を保持する） */
-  const mergeAppearances = useCallback(
-    (fetched: TvAppearance[]): TvAppearance[] => {
-      const existingMap = new Map(appearances.map((a) => [a.id, a]))
+  // フィルタ設定は localStorage に保存（UIの好み設定）
+  const [filterKanto, setFilterKanto] = useLocalStorage('timelesz-filter-kanto', true)
+  const [filterTerrestrial, setFilterTerrestrial] = useLocalStorage('timelesz-filter-terrestrial', true)
 
-      const merged = fetched.map((item) => {
-        const existing = existingMap.get(item.id)
-        return existing
-          ? { ...item, watched: existing.watched }  // watched 状態を引き継ぐ
-          : item
-      })
+  /** ログイン時に Supabase からデータを読み込む */
+  useEffect(() => {
+    setLoading(true)
+    loadAppearances(userId)
+      .then(setAppearances)
+      .catch((e: unknown) => setError(e instanceof Error ? e.message : '読み込み失敗'))
+      .finally(() => setLoading(false))
+  }, [userId])
 
-      // 手動追加分を保持
-      const manualItems = appearances.filter((a) => a.isManual)
-      const mergedIds = new Set(merged.map((a) => a.id))
-      const newManual = manualItems.filter((a) => !mergedIds.has(a.id))
-
-      return [...merged, ...newManual].sort(
-        (a, b) => new Date(a.datetime).getTime() - new Date(b.datetime).getTime()
-      )
-    },
-    [appearances]
-  )
-
-  /** thetv.jp からスケジュールを取得して更新 */
+  /** thetv.jp からスケジュールを取得して DB に反映 */
   const refresh = useCallback(async () => {
     setLoading(true)
     setError(null)
     try {
+      // 1. thetv.jp から取得
       const fetched = await fetchSchedule()
-      setAppearances(mergeAppearances(fetched))
+
+      // 2. 現在の DB の状態を取得（watched 状態を保持するため）
+      const existing = await loadAppearances(userId)
+      const existingMap = new Map(existing.map((a) => [a.id, a]))
+
+      // 3. スクレイプ分をマージ（watched は既存値を引き継ぐ）
+      const merged = fetched.map((item) => {
+        const ex = existingMap.get(item.id)
+        return ex ? { ...item, watched: ex.watched } : item
+      })
+
+      // 4. 手動追加分を保持（スクレイプ結果に含まれないもの）
+      const mergedIds = new Set(merged.map((a) => a.id))
+      const keptManual = existing.filter((a) => a.isManual && !mergedIds.has(a.id))
+
+      const final = [...merged, ...keptManual].sort(
+        (a, b) => new Date(a.datetime).getTime() - new Date(b.datetime).getTime()
+      )
+
+      // 5. DB に upsert してローカル状態を更新
+      await upsertAppearances(final, userId)
+      setAppearances(final)
       setLastFetched(new Date().toISOString())
     } catch (e) {
       setError(e instanceof Error ? e.message : '取得に失敗しました')
     } finally {
       setLoading(false)
     }
-  }, [mergeAppearances, setAppearances, setLastFetched])
+  }, [userId, setLastFetched])
 
   /** 視聴状態を切り替える */
   const toggleWatched = useCallback(
-    (id: string) => {
-      setAppearances((prev) =>
-        prev.map((a) => (a.id === id ? { ...a, watched: !a.watched } : a))
-      )
+    async (id: string) => {
+      const item = appearances.find((a) => a.id === id)
+      if (!item) return
+      const next = !item.watched
+      // 楽観的更新（先にUIを更新してからDBに書く）
+      setAppearances((prev) => prev.map((a) => (a.id === id ? { ...a, watched: next } : a)))
+      try {
+        await updateWatched(id, next, userId)
+      } catch (e) {
+        // 失敗したらロールバック
+        setAppearances((prev) => prev.map((a) => (a.id === id ? { ...a, watched: !next } : a)))
+        setError(e instanceof Error ? e.message : '更新に失敗しました')
+      }
     },
-    [setAppearances]
+    [appearances, userId]
   )
 
   /** 手動で番組を追加する */
   const addManual = useCallback(
-    (item: Omit<TvAppearance, 'id' | 'watched' | 'isManual'>) => {
+    async (item: Omit<TvAppearance, 'id' | 'watched' | 'isManual'>) => {
       const newItem: TvAppearance = {
         ...item,
         id: `manual-${Date.now()}-${Math.random().toString(36).slice(2)}`,
         watched: false,
         isManual: true,
       }
+      await insertAppearance(newItem, userId)
       setAppearances((prev) =>
         [...prev, newItem].sort(
           (a, b) => new Date(a.datetime).getTime() - new Date(b.datetime).getTime()
         )
       )
     },
-    [setAppearances]
+    [userId]
   )
 
   /** 番組を削除する（手動追加分のみ） */
   const remove = useCallback(
-    (id: string) => {
+    async (id: string) => {
       setAppearances((prev) => prev.filter((a) => a.id !== id))
+      try {
+        await deleteAppearance(id, userId)
+      } catch (e) {
+        // 失敗したらロールバック（再取得）
+        loadAppearances(userId).then(setAppearances)
+        setError(e instanceof Error ? e.message : '削除に失敗しました')
+      }
     },
-    [setAppearances]
+    [userId]
   )
 
-  // フィルタ設定（localStorage に保存）
-  const [filterKanto, setFilterKanto] = useLocalStorage('timelesz-filter-kanto', true)
-  const [filterTerrestrial, setFilterTerrestrial] = useLocalStorage('timelesz-filter-terrestrial', true)
-
-  /** 手動追加分はフィルタをスルーし、スクレイプ分のみに適用する */
+  /** フィルタ適用（手動追加分はスルー） */
   const applyFilter = useCallback(
     (items: TvAppearance[]): TvAppearance[] => {
       if (!filterKanto && !filterTerrestrial) return items
-      return items.filter((a) => {
-        if (a.isManual) return true  // 手動追加は常に表示
-        if (filterKanto && filterTerrestrial) return isKantoTerrestrial(a.channel)
-        // 地上波のみ or 関東のみは単独では判定不可のため同じ扱い
-        if (filterKanto || filterTerrestrial) return isKantoTerrestrial(a.channel)
-        return true
-      })
+      return items.filter((a) => a.isManual || isKantoTerrestrial(a.channel))
     },
     [filterKanto, filterTerrestrial]
   )
@@ -110,7 +133,9 @@ export function useAppearances() {
   // セクション別に分類（フィルタ適用済み）
   const todayItems = applyFilter(appearances.filter((a) => isToday(a.datetime)))
   const upcomingItems = applyFilter(appearances.filter((a) => isFuture(a.datetime)))
-  const unwatchedPastItems = applyFilter(appearances.filter((a) => isPast(a.datetime) && !a.watched))
+  const unwatchedPastItems = applyFilter(
+    appearances.filter((a) => isPast(a.datetime) && !a.watched)
+  )
 
   return {
     appearances,

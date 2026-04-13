@@ -2,10 +2,35 @@ import { useState, useEffect } from 'react'
 import { Header } from './components/Header'
 import { AppearanceList } from './components/AppearanceList'
 import { AddAppearanceForm } from './components/AddAppearanceForm'
+import { AuthForm } from './components/AuthForm'
 import { useAppearances } from './hooks/useAppearances'
+import { useAuth } from './hooks/useAuth'
 import './styles/index.css'
 
 export default function App() {
+  const { user, authLoading, signIn, signUp, signOut } = useAuth()
+
+  if (authLoading) {
+    return <div className="auth-loading">読み込み中...</div>
+  }
+
+  if (!user) {
+    return <AuthForm onSignIn={signIn} onSignUp={signUp} />
+  }
+
+  return <MainApp userId={user.id} userEmail={user.email ?? ''} onSignOut={signOut} />
+}
+
+/** 認証後のメイン画面（userId が確定してからマウントされる） */
+function MainApp({
+  userId,
+  userEmail,
+  onSignOut,
+}: {
+  userId: string
+  userEmail: string
+  onSignOut: () => Promise<void>
+}) {
   const {
     todayItems,
     upcomingItems,
@@ -21,11 +46,11 @@ export default function App() {
     toggleWatched,
     addManual,
     remove,
-  } = useAppearances()
+  } = useAppearances(userId)
 
   const [showAddForm, setShowAddForm] = useState(false)
 
-  // 初回起動時に自動取得
+  // 初回ロード後、まだ一度もフェッチしていなければ自動取得
   useEffect(() => {
     if (!lastFetched) {
       refresh()
@@ -37,12 +62,14 @@ export default function App() {
       <Header
         loading={loading}
         lastFetched={lastFetched}
+        userEmail={userEmail}
         filterKanto={filterKanto}
         filterTerrestrial={filterTerrestrial}
         onFilterKantoChange={setFilterKanto}
         onFilterTerrestrialChange={setFilterTerrestrial}
         onRefresh={refresh}
         onAddClick={() => setShowAddForm(true)}
+        onSignOut={onSignOut}
       />
 
       <main className="main">

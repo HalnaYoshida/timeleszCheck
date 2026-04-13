@@ -1,23 +1,27 @@
 interface HeaderProps {
   loading: boolean
   lastFetched: string | null
+  userEmail: string
   filterKanto: boolean
   filterTerrestrial: boolean
   onFilterKantoChange: (v: boolean) => void
   onFilterTerrestrialChange: (v: boolean) => void
   onRefresh: () => void
   onAddClick: () => void
+  onSignOut: () => Promise<void>
 }
 
 export function Header({
   loading,
   lastFetched,
+  userEmail,
   filterKanto,
   filterTerrestrial,
   onFilterKantoChange,
   onFilterTerrestrialChange,
   onRefresh,
   onAddClick,
+  onSignOut,
 }: HeaderProps) {
   const lastFetchedText = lastFetched
     ? new Date(lastFetched).toLocaleString('ja-JP', {
@@ -71,6 +75,12 @@ export function Header({
         >
           {loading ? '取得中...' : '更新'}
         </button>
+        <div className="user-menu">
+          <span className="user-email">{userEmail}</span>
+          <button className="btn btn-secondary" onClick={onSignOut}>
+            ログアウト
+          </button>
+        </div>
       </div>
     </header>
   )
