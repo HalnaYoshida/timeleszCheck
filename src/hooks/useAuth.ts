@@ -22,7 +22,14 @@ export function useAuth() {
   }, [])
 
   const signUp = async (email: string, password: string) => {
-    const { error } = await supabase.auth.signUp({ email, password })
+    const { error } = await supabase.auth.signUp({
+      email,
+      password,
+      options: {
+        // 確認メールのリンク先をアプリの現在のURLに設定
+        emailRedirectTo: window.location.origin,
+      },
+    })
     if (error) throw error
   }
 

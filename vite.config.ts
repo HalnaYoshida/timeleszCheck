@@ -5,10 +5,11 @@ export default defineConfig({
   plugins: [react()],
   server: {
     proxy: {
-      '/api/schedule': {
+      // /api/person/2000088701 → https://thetv.jp/person/2000088701/tv/
+      '/api/person': {
         target: 'https://thetv.jp',
         changeOrigin: true,
-        rewrite: () => '/person/2000088701/tv/',
+        rewrite: (path) => path.replace('/api/person', '/person') + '/tv/',
       },
     },
   },

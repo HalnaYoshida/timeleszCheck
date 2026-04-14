@@ -2,11 +2,26 @@ import type { TvAppearance } from '../types'
 import { parseJaDatetime } from '../utils/dateUtils'
 
 /**
+ * timeleszグループ + 全メンバーの thetv.jp person ID
+ * グループを先頭に置くことで、グループ出演が dedup 時に優先される
+ */
+export const FETCH_TARGETS = [
+  { personId: '2000088701', label: 'timelesz' },
+  { personId: '1000082993', label: '佐藤勝利' },
+  { personId: '1000066863', label: '菊池風磨' },
+  { personId: '1000082989', label: '松島聡' },
+  { personId: '1000090863', label: '寺西拓人' },
+  { personId: '2000002191', label: '原嘉孝' },
+  { personId: '2000044633', label: '橋本将生' },
+  { personId: '2000093936', label: '猪俣周杜' },
+  { personId: '2000093937', label: '篠塚大輝' },
+] as const
+
+/**
  * thetv.jp のHTMLをパースして TvAppearance[] を返す
  *
- * 実際の構造:
  * <li class="thumblist__item">
- *   <a href="/program/0001060543/47"></a>   ← 空のリンク (IDのみ)
+ *   <a href="/program/0001060543/47"></a>
  *   <div class="label__block">バラエティー</div>
  *   <p class="item-text">タイムレスマン</p>
  *   <div class="item-bottom">
@@ -18,7 +33,6 @@ import { parseJaDatetime } from '../utils/dateUtils'
 function parseThetvHtml(html: string): TvAppearance[] {
   const parser = new DOMParser()
   const doc = parser.parseFromString(html, 'text/html')
-
   const items = doc.querySelectorAll('.program_info li.thumblist__item')
   const appearances: TvAppearance[] = []
 
@@ -31,7 +45,6 @@ function parseThetvHtml(html: string): TvAppearance[] {
 
     if (!title || !scheduleText) return
 
-    // "2026年4月14日(火) 深夜0:54／青森放送" → 日時と放送局を分割
     const parts = scheduleText.split('／')
     const datepart = parts[0]?.trim() ?? ''
     const channel = parts[1]?.trim() ?? ''
@@ -40,51 +53,67 @@ function parseThetvHtml(html: string): TvAppearance[] {
     if (!date) return
 
     const id = `thetv-${href.replace(/\//g, '-').replace(/^-|-$/g, '')}-${date.getTime()}`
-
-    appearances.push({
-      id,
-      title,
-      channel,
-      datetime: date.toISOString(),
-      category,
-      role,
-      watched: false,
-      isManual: false,
-    })
+    appearances.push({ id, title, channel, datetime: date.toISOString(), category, role, watched: false, isManual: false })
   })
 
   return appearances
 }
 
 /**
- * Vite proxy 経由で thetv.jp から出演スケジュールを取得する (開発時)
+ * Vite proxy 経由で1人分を取得する
+ * /api/person/:personId → https://thetv.jp/person/:personId/tv/
  */
-export async function fetchFromProxy(): Promise<TvAppearance[]> {
-  const res = await fetch('/api/schedule')
+async function fetchPersonFromProxy(personId: string): Promise<TvAppearance[]> {
+  const res = await fetch(`/api/person/${personId}`)
   if (!res.ok) throw new Error(`fetch failed: ${res.status}`)
   const html = await res.text()
   return parseThetvHtml(html)
 }
 
 /**
- * public/schedule.json から取得する (本番時 / npm run fetch 生成済みファイル)
+ * 全ソース（グループ + 全メンバー）を並列フェッチして ID でデデュープする
+ * - 失敗したソースはスキップ（他のソースは継続）
+ * - グループが先頭なのでグループ出演が優先される
  */
-export async function fetchFromJson(): Promise<TvAppearance[]> {
+async function fetchAllFromProxy(): Promise<TvAppearance[]> {
+  const results = await Promise.allSettled(
+    FETCH_TARGETS.map(({ personId }) => fetchPersonFromProxy(personId))
+  )
+
+  const seen = new Set<string>()
+  const merged: TvAppearance[] = []
+
+  for (const result of results) {
+    if (result.status === 'rejected') continue
+    for (const item of result.value) {
+      if (!seen.has(item.id)) {
+        seen.add(item.id)
+        merged.push(item)
+      }
+    }
+  }
+
+  return merged.sort((a, b) => new Date(a.datetime).getTime() - new Date(b.datetime).getTime())
+}
+
+/**
+ * public/schedule.json から取得する（本番 / npm run fetch 生成済み）
+ */
+async function fetchFromJson(): Promise<TvAppearance[]> {
   const res = await fetch('/schedule.json')
   if (!res.ok) throw new Error(`schedule.json not found: ${res.status}`)
   return res.json() as Promise<TvAppearance[]>
 }
 
 /**
- * proxy → JSON の順でフォールバックしながら取得する
+ * proxy → JSON の順でフォールバックしながら全ソースを取得する
  */
 export async function fetchSchedule(): Promise<TvAppearance[]> {
   try {
-    const data = await fetchFromProxy()
+    const data = await fetchAllFromProxy()
     if (data.length > 0) return data
     throw new Error('empty result from proxy')
   } catch {
-    // 本番環境やCORSエラー時は schedule.json にフォールバック
     return fetchFromJson()
   }
 }

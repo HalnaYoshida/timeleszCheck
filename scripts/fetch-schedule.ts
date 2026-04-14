@@ -1,9 +1,7 @@
 /**
  * npm run fetch で実行する Node.js スクリプト
- * thetv.jp から timelesz の出演スケジュールを取得し public/schedule.json に保存する
- *
- * 使い方:
- *   npm run fetch
+ * timeleszグループ + 全メンバーの thetv.jp 出演スケジュールを取得し
+ * public/schedule.json に保存する
  */
 
 import { parse as parseHtml } from 'node-html-parser'
@@ -13,6 +11,23 @@ import { fileURLToPath } from 'url'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const OUTPUT_PATH = join(__dirname, '..', 'public', 'schedule.json')
+
+const FETCH_TARGETS = [
+  { personId: '2000088701', label: 'timelesz' },
+  { personId: '1000082993', label: '佐藤勝利' },
+  { personId: '1000066863', label: '菊池風磨' },
+  { personId: '1000082989', label: '松島聡' },
+  { personId: '1000090863', label: '寺西拓人' },
+  { personId: '2000002191', label: '原嘉孝' },
+  { personId: '2000044633', label: '橋本将生' },
+  { personId: '2000093936', label: '猪俣周杜' },
+  { personId: '2000093937', label: '篠塚大輝' },
+]
+
+const HEADERS = {
+  'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 Chrome/120 Safari/537.36',
+  'Accept-Language': 'ja,en;q=0.9',
+}
 
 interface TvAppearance {
   id: string
@@ -36,33 +51,17 @@ function resolveHour(prefix: string, hour: number): number {
 function parseJaDatetime(text: string): Date | null {
   const dateMatch = text.match(/(\d{4})年(\d{1,2})月(\d{1,2})日/)
   if (!dateMatch) return null
-
   const year = parseInt(dateMatch[1], 10)
   const month = parseInt(dateMatch[2], 10) - 1
   const day = parseInt(dateMatch[3], 10)
-
   const timeMatch = text.match(/(深夜|早朝|朝|午前|昼|午後|夕方|夜)?(\d{1,2}):(\d{2})/)
   const prefix = timeMatch?.[1] ?? ''
   const rawHour = timeMatch ? parseInt(timeMatch[2], 10) : 0
   const minute = timeMatch ? parseInt(timeMatch[3], 10) : 0
-  const hour = resolveHour(prefix, rawHour)
-
-  return new Date(year, month, day, hour, minute)
+  return new Date(year, month, day, resolveHour(prefix, rawHour), minute)
 }
 
-async function fetchSchedule(): Promise<TvAppearance[]> {
-  console.log('Fetching from thetv.jp...')
-  const res = await fetch('https://thetv.jp/person/2000088701/tv/', {
-    headers: {
-      'User-Agent':
-        'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 Chrome/120 Safari/537.36',
-      'Accept-Language': 'ja,en;q=0.9',
-    },
-  })
-
-  if (!res.ok) throw new Error(`HTTP ${res.status}`)
-  const html = await res.text()
-
+function parseHtmlToAppearances(html: string): TvAppearance[] {
   const root = parseHtml(html)
   const items = root.querySelectorAll('.program_info li.thumblist__item')
   const appearances: TvAppearance[] = []
@@ -75,43 +74,58 @@ async function fetchSchedule(): Promise<TvAppearance[]> {
     const href = li.querySelector('a[href^="/program/"]')?.getAttribute('href') ?? ''
 
     if (!title || !scheduleText) continue
-
     const parts = scheduleText.split('／')
     const datepart = parts[0]?.trim() ?? ''
     const channel = parts[1]?.trim() ?? ''
-
     const date = parseJaDatetime(datepart)
     if (!date) continue
 
     const id = `thetv-${href.replace(/\//g, '-').replace(/^-|-$/g, '')}-${date.getTime()}`
-
-    appearances.push({
-      id,
-      title,
-      channel,
-      datetime: date.toISOString(),
-      category,
-      role,
-      watched: false,
-      isManual: false,
-    })
+    appearances.push({ id, title, channel, datetime: date.toISOString(), category, role, watched: false, isManual: false })
   }
-
   return appearances
 }
 
-async function main() {
-  try {
-    const appearances = await fetchSchedule()
-    console.log(`Found ${appearances.length} appearances`)
-
-    mkdirSync(join(__dirname, '..', 'public'), { recursive: true })
-    writeFileSync(OUTPUT_PATH, JSON.stringify(appearances, null, 2), 'utf-8')
-    console.log(`Saved to ${OUTPUT_PATH}`)
-  } catch (e) {
-    console.error('Error:', e)
-    process.exit(1)
-  }
+async function fetchPerson(personId: string, label: string): Promise<TvAppearance[]> {
+  const url = `https://thetv.jp/person/${personId}/tv/`
+  const res = await fetch(url, { headers: HEADERS })
+  if (!res.ok) throw new Error(`HTTP ${res.status} for ${label}`)
+  const html = await res.text()
+  const items = parseHtmlToAppearances(html)
+  console.log(`  ${label}: ${items.length}件`)
+  return items
 }
 
-main()
+async function main() {
+  console.log('Fetching from thetv.jp...')
+
+  const results = await Promise.allSettled(
+    FETCH_TARGETS.map(({ personId, label }) => fetchPerson(personId, label))
+  )
+
+  // ID でデデュープ（グループが先頭なので優先される）
+  const seen = new Set<string>()
+  const merged: TvAppearance[] = []
+
+  for (const result of results) {
+    if (result.status === 'rejected') {
+      console.warn('  スキップ:', result.reason)
+      continue
+    }
+    for (const item of result.value) {
+      if (!seen.has(item.id)) {
+        seen.add(item.id)
+        merged.push(item)
+      }
+    }
+  }
+
+  merged.sort((a, b) => new Date(a.datetime).getTime() - new Date(b.datetime).getTime())
+
+  console.log(`合計 ${merged.length} 件（重複除去後）`)
+  mkdirSync(join(__dirname, '..', 'public'), { recursive: true })
+  writeFileSync(OUTPUT_PATH, JSON.stringify(merged, null, 2), 'utf-8')
+  console.log(`Saved to ${OUTPUT_PATH}`)
+}
+
+main().catch((e) => { console.error(e); process.exit(1) })

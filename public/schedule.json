@@ -1,10 +1,60 @@
 [
   {
+    "id": "thetv-program-0001037133-121-1776093300000",
+    "title": "何か“オモシロいコト”ないの？",
+    "channel": "AKT",
+    "datetime": "2026-04-13T15:15:00.000Z",
+    "category": "今日放送バラエティー",
+    "role": "司会",
+    "watched": false,
+    "isManual": false
+  },
+  {
+    "id": "thetv-program-0001037133-119-1776093300000",
+    "title": "何か“オモシロいコト”ないの？",
+    "channel": "OHK",
+    "datetime": "2026-04-13T15:15:00.000Z",
+    "category": "今日放送バラエティー",
+    "role": "司会",
+    "watched": false,
+    "isManual": false
+  },
+  {
+    "id": "thetv-program-0001037133-120-1776093600000",
+    "title": "何か“オモシロいコト”ないの？",
+    "channel": "KTN",
+    "datetime": "2026-04-13T15:20:00.000Z",
+    "category": "今日放送バラエティー",
+    "role": "司会",
+    "watched": false,
+    "isManual": false
+  },
+  {
+    "id": "thetv-program-0001061146-32-1776093660000",
+    "title": "ニカゲーム",
+    "channel": "KSB",
+    "datetime": "2026-04-13T15:21:00.000Z",
+    "category": "今日放送バラエティー",
+    "role": "出演",
+    "watched": false,
+    "isManual": false
+  },
+  {
+    "id": "thetv-program-0001071981-3-1776093840000",
+    "title": "火曜プラチナイト「夜の音-TOKYO MIDNIGHT MUSIC-」",
+    "channel": "日本テレビ",
+    "datetime": "2026-04-13T15:24:00.000Z",
+    "category": "今日放送バラエティー",
+    "role": "司会",
+    "watched": false,
+    "isManual": false
+  },
+  {
     "id": "thetv-program-0001060543-47-1776095640000",
     "title": "タイムレスマン",
     "channel": "青森放送",
     "datetime": "2026-04-13T15:54:00.000Z",
-    "category": "バラエティー",
+    "category": "今日放送バラエティー",
     "role": "出演",
     "watched": false,
     "isManual": false
@@ -14,7 +64,7 @@
     "title": "タイムレスマン",
     "channel": "東海テレビ",
     "datetime": "2026-04-14T04:10:00.000Z",
-    "category": "バラエティー",
+    "category": "今日放送バラエティー",
     "role": "出演",
     "watched": false,
     "isManual": false
@@ -24,6 +74,146 @@
     "title": "タイムレスマン",
     "channel": "青森放送",
     "datetime": "2026-04-14T04:22:00.000Z",
+    "category": "今日放送バラエティー",
+    "role": "出演",
+    "watched": false,
+    "isManual": false
+  },
+  {
+    "id": "thetv-program-0000805434-1037-1776164400000",
+    "title": "ザ！世界仰天ニュース3時間SP",
+    "channel": "日本テレビ",
+    "datetime": "2026-04-14T11:00:00.000Z",
+    "category": "今日放送バラエティー",
+    "role": "出演",
+    "watched": false,
+    "isManual": false
+  },
+  {
+    "id": "thetv-program-0001072766-1-1776171600000",
+    "title": "第1話 ボーダレス〜広域移動捜査隊〜",
+    "channel": "UMK",
+    "datetime": "2026-04-14T13:00:00.000Z",
+    "category": "今日放送ドラマ",
+    "role": "出演",
+    "watched": false,
+    "isManual": false
+  },
+  {
+    "id": "thetv-program-0001064055-10-1776178560000",
+    "title": "火バラナイト 地球まるごと大実験　ネイチャーティーチャー",
+    "channel": "TBS",
+    "datetime": "2026-04-14T14:56:00.000Z",
+    "category": "今日放送バラエティー",
+    "role": "司会",
+    "watched": false,
+    "isManual": false
+  },
+  {
+    "id": "thetv-program-0001037133-109-1776179700000",
+    "title": "何か“オモシロいコト”ないの？",
+    "channel": "TNC",
+    "datetime": "2026-04-14T15:15:00.000Z",
+    "category": "バラエティー",
+    "role": "出演",
+    "watched": false,
+    "isManual": false
+  },
+  {
+    "id": "thetv-program-0001037133-117-1776181800000",
+    "title": "何か“オモシロいコト”ないの？",
+    "channel": "ＯＴＶ",
+    "datetime": "2026-04-14T15:50:00.000Z",
+    "category": "バラエティー",
+    "role": "司会",
+    "watched": false,
+    "isManual": false
+  },
+  {
+    "id": "thetv-program-0001037133-112-1776182040000",
+    "title": "何か“オモシロいコト”ないの？",
+    "channel": "UMK",
+    "datetime": "2026-04-14T15:54:00.000Z",
+    "category": "バラエティー",
+    "role": "司会",
+    "watched": false,
+    "isManual": false
+  },
+  {
+    "id": "thetv-program-0000805434-1034-1776188700000",
+    "title": "ザ！世界仰天ニュース",
+    "channel": "ＴＯＳテレビ大分",
+    "datetime": "2026-04-14T17:45:00.000Z",
+    "category": "バラエティー",
+    "role": "出演",
+    "watched": false,
+    "isManual": false
+  },
+  {
+    "id": "thetv-program-0001061146-34-1776229020000",
+    "title": "バラバラ大作戦　ニカゲーム",
+    "channel": "テレビ朝日",
+    "datetime": "2026-04-15T04:57:00.000Z",
+    "category": "バラエティー",
+    "role": "出演",
+    "watched": false,
+    "isManual": false
+  },
+  {
+    "id": "thetv-program-0001072766-2-1776254400000",
+    "title": "第2話 ボーダレス〜広域移動捜査隊〜",
+    "channel": "テレビ朝日",
+    "datetime": "2026-04-15T12:00:00.000Z",
+    "category": "ドラマ",
+    "role": "出演",
+    "watched": false,
+    "isManual": false
+  },
+  {
+    "id": "thetv-program-0000810732-575-1776264960000",
+    "title": "ニノさん",
+    "channel": "OBS",
+    "datetime": "2026-04-15T14:56:00.000Z",
+    "category": "バラエティー",
+    "role": "出演",
+    "watched": false,
+    "isManual": false
+  },
+  {
+    "id": "thetv-program-0001037133-123-1776266100000",
+    "title": "何か“オモシロいコト”ないの？",
+    "channel": "フジテレビ",
+    "datetime": "2026-04-15T15:15:00.000Z",
+    "category": "バラエティー",
+    "role": "司会",
+    "watched": false,
+    "isManual": false
+  },
+  {
+    "id": "thetv-program-0000945816-331-1776266100000",
+    "title": "有吉ぃぃeeeee！【スイカゲーム新作】timelesz橋本将生とクリスマスSP",
+    "channel": "TKU",
+    "datetime": "2026-04-15T15:15:00.000Z",
+    "category": "バラエティー",
+    "role": "ゲスト",
+    "watched": false,
+    "isManual": false
+  },
+  {
+    "id": "thetv-program-0001060543-45-1776268500000",
+    "title": "タイムレスマン",
+    "channel": "ＥＢＣ",
+    "datetime": "2026-04-15T15:55:00.000Z",
+    "category": "バラエティー",
+    "role": "出演",
+    "watched": false,
+    "isManual": false
+  },
+  {
+    "id": "thetv-program-0001061146-33-1776313260000",
+    "title": "ニカゲーム",
+    "channel": "静岡朝日テレビ",
+    "datetime": "2026-04-16T04:21:00.000Z",
     "category": "バラエティー",
     "role": "出演",
     "watched": false,
@@ -40,20 +230,50 @@
     "isManual": false
   },
   {
-    "id": "thetv-program-0001060543-45-1776268500000",
+    "id": "thetv-program-0001060543-51-1776427200000",
     "title": "タイムレスマン",
-    "channel": "ＥＢＣ",
-    "datetime": "2026-04-15T15:55:00.000Z",
+    "channel": "フジテレビ",
+    "datetime": "2026-04-17T12:00:00.000Z",
     "category": "バラエティー",
     "role": "出演",
     "watched": false,
     "isManual": false
   },
   {
-    "id": "thetv-program-0001060543-51-1776427200000",
+    "id": "thetv-program-0000805431-1027-1776443400000",
+    "title": "踊る！さんま御殿!!セレクション",
+    "channel": "中京テレビ",
+    "datetime": "2026-04-17T16:30:00.000Z",
+    "category": "バラエティー",
+    "role": "出演",
+    "watched": false,
+    "isManual": false
+  },
+  {
+    "id": "thetv-program-0000948412-124-1776448800000",
+    "title": "芸能人が本気で考えた！ドッキリGP",
+    "channel": "高知さんさん",
+    "datetime": "2026-04-17T18:00:00.000Z",
+    "category": "バラエティー",
+    "role": "出演",
+    "watched": false,
+    "isManual": false
+  },
+  {
+    "id": "thetv-program-0001016083-95-1776450840000",
+    "title": "タクシー運転手さん一番うまい店に連れてって！ ２．５ＨＳＰ　後編",
+    "channel": "TVI",
+    "datetime": "2026-04-17T18:34:00.000Z",
+    "category": "バラエティー",
+    "role": "ゲスト",
+    "watched": false,
+    "isManual": false
+  },
+  {
+    "id": "thetv-program-0001060543-50-1776456000000",
     "title": "タイムレスマン",
-    "channel": "フジテレビ",
-    "datetime": "2026-04-17T12:00:00.000Z",
+    "channel": "OHK",
+    "datetime": "2026-04-17T20:00:00.000Z",
     "category": "バラエティー",
     "role": "出演",
     "watched": false,
@@ -70,10 +290,30 @@
     "isManual": false
   },
   {
-    "id": "thetv-program-0001060543-50-1776456000000",
-    "title": "タイムレスマン",
-    "channel": "OHK",
-    "datetime": "2026-04-17T20:00:00.000Z",
+    "id": "thetv-program-0001037133-118-1776475500000",
+    "title": "何か“オモシロいコト”ないの？",
+    "channel": "FTB",
+    "datetime": "2026-04-18T01:25:00.000Z",
+    "category": "バラエティー",
+    "role": "司会",
+    "watched": false,
+    "isManual": false
+  },
+  {
+    "id": "thetv-program-0000999386-216-1776477000000",
+    "title": "火曜は全力！華大さんと千鳥くん",
+    "channel": "ｔｙｓ",
+    "datetime": "2026-04-18T01:50:00.000Z",
+    "category": "バラエティー",
+    "role": "ゲスト",
+    "watched": false,
+    "isManual": false
+  },
+  {
+    "id": "thetv-program-0001061146-30-1776477600000",
+    "title": "ニカゲーム",
+    "channel": "YTS",
+    "datetime": "2026-04-18T02:00:00.000Z",
     "category": "バラエティー",
     "role": "出演",
     "watched": false,
@@ -90,10 +330,70 @@
     "isManual": false
   },
   {
+    "id": "thetv-program-0000913596-300-1776531240000",
+    "title": "今夜はナゾトレ放送十年イヤー突入！レギュラー陣が東京新名所巡るはとバスツアー",
+    "channel": "ｔｙｓ",
+    "datetime": "2026-04-18T16:54:00.000Z",
+    "category": "バラエティー",
+    "role": "ゲスト",
+    "watched": false,
+    "isManual": false
+  },
+  {
     "id": "thetv-program-0001065970-25-1776531600000",
     "title": "timeleszファミリア",
     "channel": "日本テレビ",
     "datetime": "2026-04-18T17:00:00.000Z",
+    "category": "バラエティー",
+    "role": "出演",
+    "watched": false,
+    "isManual": false
+  },
+  {
+    "id": "thetv-program-0001061146-22-1776562200000",
+    "title": "ニカゲーム",
+    "channel": "HOME",
+    "datetime": "2026-04-19T01:30:00.000Z",
+    "category": "バラエティー",
+    "role": "出演",
+    "watched": false,
+    "isManual": false
+  },
+  {
+    "id": "thetv-program-0000849597-523-1776653700000",
+    "title": "ヒルナンデス！",
+    "channel": "日本テレビ",
+    "datetime": "2026-04-20T02:55:00.000Z",
+    "category": "情報・ワイドショー",
+    "role": "出演",
+    "watched": false,
+    "isManual": false
+  },
+  {
+    "id": "thetv-program-0001037109-114-1776658800000",
+    "title": "クロナダル",
+    "channel": "OAB",
+    "datetime": "2026-04-20T04:20:00.000Z",
+    "category": "バラエティー",
+    "role": "その他",
+    "watched": false,
+    "isManual": false
+  },
+  {
+    "id": "thetv-program-0001057944-1-1776659280000",
+    "title": "第1話 アポロの歌",
+    "channel": "IBC",
+    "datetime": "2026-04-20T04:28:00.000Z",
+    "category": "ドラマ",
+    "role": "出演",
+    "watched": false,
+    "isManual": false
+  },
+  {
+    "id": "thetv-program-0001037780-112-1776659400000",
+    "title": "相葉◎×部",
+    "channel": "UHB",
+    "datetime": "2026-04-20T04:30:00.000Z",
     "category": "バラエティー",
     "role": "出演",
     "watched": false,
@@ -110,12 +410,62 @@
     "isManual": false
   },
   {
-    "id": "thetv-program-0001037109-114-1776658800000",
-    "title": "クロナダル",
-    "channel": "OAB",
-    "datetime": "2026-04-20T04:20:00.000Z",
+    "id": "thetv-program-0001059255-1-1776700740000",
+    "title": "あの頃からわたしたちは",
+    "channel": "ＫＮＢテレビ",
+    "datetime": "2026-04-20T15:59:00.000Z",
     "category": "バラエティー",
-    "role": "その他",
+    "role": "出演",
+    "watched": false,
+    "isManual": false
+  },
+  {
+    "id": "thetv-program-0001060543-31-1776744600000",
+    "title": "タイムレスマン",
+    "channel": "東海テレビ",
+    "datetime": "2026-04-21T04:10:00.000Z",
+    "category": "バラエティー",
+    "role": "出演",
+    "watched": false,
+    "isManual": false
+  },
+  {
+    "id": "thetv-program-0000805434-1038-1776772800000",
+    "title": "ザ！世界仰天ニュース",
+    "channel": "日本テレビ",
+    "datetime": "2026-04-21T12:00:00.000Z",
+    "category": "バラエティー",
+    "role": "出演",
+    "watched": false,
+    "isManual": false
+  },
+  {
+    "id": "thetv-program-0001037133-110-1776784500000",
+    "title": "何か“オモシロいコト”ないの？",
+    "channel": "TNC",
+    "datetime": "2026-04-21T15:15:00.000Z",
+    "category": "バラエティー",
+    "role": "ゲスト",
+    "watched": false,
+    "isManual": false
+  },
+  {
+    "id": "thetv-program-0001064624-2-1776831840000",
+    "title": "トーク★ハンサム",
+    "channel": "YBS",
+    "datetime": "2026-04-22T04:24:00.000Z",
+    "category": "バラエティー",
+    "role": "出演",
+    "watched": false,
+    "isManual": false
+  },
+  {
+    "id": "thetv-program-0001060543-46-1776873300000",
+    "title": "タイムレスマン",
+    "channel": "ＥＢＣ",
+    "datetime": "2026-04-22T15:55:00.000Z",
+    "category": "バラエティー",
+    "role": "出演",
     "watched": false,
     "isManual": false
   }
