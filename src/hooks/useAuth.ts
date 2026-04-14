@@ -38,10 +38,26 @@ export function useAuth() {
     if (error) throw error
   }
 
+  const signInWithGoogle = async () => {
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: 'google',
+      options: { redirectTo: window.location.origin },
+    })
+    if (error) throw error
+  }
+
+  const signInWithTwitter = async () => {
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: 'twitter',
+      options: { redirectTo: window.location.origin },
+    })
+    if (error) throw error
+  }
+
   const signOut = async () => {
     const { error } = await supabase.auth.signOut()
     if (error) throw error
   }
 
-  return { user, authLoading, signUp, signIn, signOut }
+  return { user, authLoading, signUp, signIn, signInWithGoogle, signInWithTwitter, signOut }
 }

@@ -8,14 +8,20 @@ import { useAuth } from './hooks/useAuth'
 import './styles/index.css'
 
 export default function App() {
-  const { user, authLoading, signIn, signUp, signOut } = useAuth()
+  const { user, authLoading, signIn, signInWithGoogle, signInWithTwitter, signOut } = useAuth()
 
   if (authLoading) {
     return <div className="auth-loading">読み込み中...</div>
   }
 
   if (!user) {
-    return <AuthForm onSignIn={signIn} onSignUp={signUp} />
+    return (
+      <AuthForm
+        onSignIn={signIn}
+        onSignInWithGoogle={signInWithGoogle}
+        onSignInWithTwitter={signInWithTwitter}
+      />
+    )
   }
 
   return <MainApp userId={user.id} userEmail={user.email ?? ''} onSignOut={signOut} />

@@ -525,6 +525,86 @@ body {
   padding: 0;
 }
 
+.oauth-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 4px;
+}
+
+.oauth-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 11px 16px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border);
+  font-size: 0.9rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, opacity 0.15s;
+}
+
+.oauth-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.oauth-btn--google {
+  background: #fff;
+  color: #3c4043;
+  border-color: #dadce0;
+}
+
+.oauth-btn--google:hover:not(:disabled) {
+  background: #f8f9fa;
+  border-color: #c6c9cc;
+}
+
+.oauth-btn--twitter {
+  background: #000;
+  color: #fff;
+  border-color: #333;
+}
+
+.oauth-btn--twitter:hover:not(:disabled) {
+  background: #1a1a1a;
+}
+
+.auth-divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 16px 0;
+  color: var(--color-text-muted);
+  font-size: 0.78rem;
+}
+
+.auth-divider::before,
+.auth-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--color-border);
+}
+
+.auth-email-toggle {
+  display: block;
+  width: 100%;
+  text-align: center;
+  padding: 8px;
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  text-decoration: none;
+}
+
+.auth-email-toggle:hover {
+  color: var(--color-text);
+}
+
 .auth-success {
   display: flex;
   flex-direction: column;
