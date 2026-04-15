@@ -13,6 +13,7 @@ interface DbRow {
   role: string
   watched: boolean
   is_manual: boolean
+  members: string[]
 }
 
 /** DB行 → アプリ型 */
@@ -26,6 +27,7 @@ function fromDb(row: DbRow): TvAppearance {
     role: row.role,
     watched: row.watched,
     isManual: row.is_manual,
+    members: row.members ?? [],
   }
 }
 
@@ -41,6 +43,7 @@ function toDb(item: TvAppearance, userId: string) {
     role: item.role,
     watched: item.watched,
     is_manual: item.isManual,
+    members: item.members,
   }
 }
 

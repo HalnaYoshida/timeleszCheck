@@ -7,7 +7,29 @@ interface AppearanceCardProps {
   onRemove?: (id: string) => void
 }
 
+/** 表示名の略称マッピング */
+const MEMBER_SHORT: Record<string, string> = {
+  'timelesz': 'グループ',
+  '佐藤勝利': '勝利',
+  '菊池風磨': '風磨',
+  '松島聡':   '聡',
+  '寺西拓人': '拓人',
+  '原嘉孝':   '嘉孝',
+  '橋本将生': '将生',
+  '猪俣周杜': '周杜',
+  '篠塚大輝': '大輝',
+}
+
+/** グループ出演なら ['グループ'] のみ、個人出演ならメンバー名一覧を返す */
+function resolveDisplayMembers(members: string[]): string[] {
+  if (members.length === 0) return []
+  if (members.includes('timelesz')) return ['グループ']
+  return members.map((m) => MEMBER_SHORT[m] ?? m)
+}
+
 export function AppearanceCard({ item, onToggle, onRemove }: AppearanceCardProps) {
+  const displayMembers = resolveDisplayMembers(item.members)
+
   return (
     <div className={`card ${item.watched ? 'card--watched' : ''}`}>
       <label className="card-checkbox-label">
@@ -30,6 +52,18 @@ export function AppearanceCard({ item, onToggle, onRemove }: AppearanceCardProps
           )}
           {item.isManual && <span className="card-badge-manual">手動</span>}
         </div>
+        {displayMembers.length > 0 && (
+          <div className="card-members">
+            {displayMembers.map((name) => (
+              <span
+                key={name}
+                className={`member-chip ${name === 'グループ' ? 'member-chip--group' : 'member-chip--solo'}`}
+              >
+                {name}
+              </span>
+            ))}
+          </div>
+        )}
       </div>
 
       {item.isManual && onRemove && (

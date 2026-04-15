@@ -53,7 +53,7 @@ function parseThetvHtml(html: string): TvAppearance[] {
     if (!date) return
 
     const id = `thetv-${href.replace(/\//g, '-').replace(/^-|-$/g, '')}-${date.getTime()}`
-    appearances.push({ id, title, channel, datetime: date.toISOString(), category, role, watched: false, isManual: false })
+    appearances.push({ id, title, channel, datetime: date.toISOString(), category, role, watched: false, isManual: false, members: [] })
   })
 
   return appearances
@@ -80,20 +80,27 @@ async function fetchAllFromProxy(): Promise<TvAppearance[]> {
     FETCH_TARGETS.map(({ personId }) => fetchPersonFromProxy(personId))
   )
 
-  const seen = new Set<string>()
-  const merged: TvAppearance[] = []
+  // ID ごとに item を保持しつつ members を蓄積する
+  const accumulator = new Map<string, { item: TvAppearance; members: Set<string> }>()
 
-  for (const result of results) {
+  for (let i = 0; i < results.length; i++) {
+    const result = results[i]
     if (result.status === 'rejected') continue
+    const label = FETCH_TARGETS[i].label
+
     for (const item of result.value) {
-      if (!seen.has(item.id)) {
-        seen.add(item.id)
-        merged.push(item)
+      const existing = accumulator.get(item.id)
+      if (!existing) {
+        accumulator.set(item.id, { item, members: new Set([label]) })
+      } else {
+        existing.members.add(label)
       }
     }
   }
 
-  return merged.sort((a, b) => new Date(a.datetime).getTime() - new Date(b.datetime).getTime())
+  return [...accumulator.values()]
+    .map(({ item, members }) => ({ ...item, members: [...members] }))
+    .sort((a, b) => new Date(a.datetime).getTime() - new Date(b.datetime).getTime())
 }
 
 /**

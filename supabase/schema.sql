@@ -11,6 +11,7 @@ create table public.tv_appearances (
   role          text        not null default '出演',
   watched       boolean     not null default false,
   is_manual     boolean     not null default false,
+  members       text[]      not null default '{}',
   created_at    timestamptz not null default now(),
 
   constraint tv_appearances_appearance_id_user_id_key

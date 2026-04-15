@@ -7,7 +7,10 @@
     "category": "今日放送バラエティー",
     "role": "司会",
     "watched": false,
-    "isManual": false
+    "isManual": false,
+    "members": [
+      "菊池風磨"
+    ]
   },
   {
     "id": "thetv-program-0001037133-119-1776093300000",
@@ -17,7 +20,10 @@
     "category": "今日放送バラエティー",
     "role": "司会",
     "watched": false,
-    "isManual": false
+    "isManual": false,
+    "members": [
+      "菊池風磨"
+    ]
   },
   {
     "id": "thetv-program-0001037133-120-1776093600000",
@@ -27,7 +33,10 @@
     "category": "今日放送バラエティー",
     "role": "司会",
     "watched": false,
-    "isManual": false
+    "isManual": false,
+    "members": [
+      "菊池風磨"
+    ]
   },
   {
     "id": "thetv-program-0001061146-32-1776093660000",
@@ -37,7 +46,10 @@
     "category": "今日放送バラエティー",
     "role": "出演",
     "watched": false,
-    "isManual": false
+    "isManual": false,
+    "members": [
+      "猪俣周杜"
+    ]
   },
   {
     "id": "thetv-program-0001071981-3-1776093840000",
@@ -47,7 +59,10 @@
     "category": "今日放送バラエティー",
     "role": "司会",
     "watched": false,
-    "isManual": false
+    "isManual": false,
+    "members": [
+      "菊池風磨"
+    ]
   },
   {
     "id": "thetv-program-0001060543-47-1776095640000",
@@ -57,7 +72,18 @@
     "category": "今日放送バラエティー",
     "role": "出演",
     "watched": false,
-    "isManual": false
+    "isManual": false,
+    "members": [
+      "timelesz",
+      "佐藤勝利",
+      "菊池風磨",
+      "松島聡",
+      "寺西拓人",
+      "原嘉孝",
+      "橋本将生",
+      "猪俣周杜",
+      "篠塚大輝"
+    ]
   },
   {
     "id": "thetv-program-0001060543-30-1776139800000",
@@ -67,7 +93,18 @@
     "category": "今日放送バラエティー",
     "role": "出演",
     "watched": false,
-    "isManual": false
+    "isManual": false,
+    "members": [
+      "timelesz",
+      "佐藤勝利",
+      "菊池風磨",
+      "松島聡",
+      "寺西拓人",
+      "原嘉孝",
+      "橋本将生",
+      "猪俣周杜",
+      "篠塚大輝"
+    ]
   },
   {
     "id": "thetv-program-0001060543-48-1776140520000",
@@ -77,7 +114,18 @@
     "category": "今日放送バラエティー",
     "role": "出演",
     "watched": false,
-    "isManual": false
+    "isManual": false,
+    "members": [
+      "timelesz",
+      "佐藤勝利",
+      "菊池風磨",
+      "松島聡",
+      "寺西拓人",
+      "原嘉孝",
+      "橋本将生",
+      "猪俣周杜",
+      "篠塚大輝"
+    ]
   },
   {
     "id": "thetv-program-0000805434-1037-1776164400000",
@@ -87,7 +135,10 @@
     "category": "今日放送バラエティー",
     "role": "出演",
     "watched": false,
-    "isManual": false
+    "isManual": false,
+    "members": [
+      "松島聡"
+    ]
   },
   {
     "id": "thetv-program-0001072766-1-1776171600000",
@@ -97,7 +148,10 @@
     "category": "今日放送ドラマ",
     "role": "出演",
     "watched": false,
-    "isManual": false
+    "isManual": false,
+    "members": [
+      "佐藤勝利"
+    ]
   },
   {
     "id": "thetv-program-0001064055-10-1776178560000",
@@ -107,7 +161,11 @@
     "category": "今日放送バラエティー",
     "role": "司会",
     "watched": false,
-    "isManual": false
+    "isManual": false,
+    "members": [
+      "原嘉孝",
+      "篠塚大輝"
+    ]
   },
   {
     "id": "thetv-program-0001037133-109-1776179700000",
@@ -117,7 +175,13 @@
     "category": "バラエティー",
     "role": "出演",
     "watched": false,
-    "isManual": false
+    "isManual": false,
+    "members": [
+      "佐藤勝利",
+      "菊池風磨",
+      "松島聡",
+      "橋本将生"
+    ]
   },
   {
     "id": "thetv-program-0001037133-117-1776181800000",
@@ -127,7 +191,10 @@
     "category": "バラエティー",
     "role": "司会",
     "watched": false,
-    "isManual": false
+    "isManual": false,
+    "members": [
+      "菊池風磨"
+    ]
   },
   {
     "id": "thetv-program-0001037133-112-1776182040000",
@@ -137,7 +204,10 @@
     "category": "バラエティー",
     "role": "司会",
     "watched": false,
-    "isManual": false
+    "isManual": false,
+    "members": [
+      "菊池風磨"
+    ]
   },
   {
     "id": "thetv-program-0000805434-1034-1776188700000",
@@ -147,7 +217,10 @@
     "category": "バラエティー",
     "role": "出演",
     "watched": false,
-    "isManual": false
+    "isManual": false,
+    "members": [
+      "松島聡"
+    ]
   },
   {
     "id": "thetv-program-0001061146-34-1776229020000",
@@ -157,7 +230,10 @@
     "category": "バラエティー",
     "role": "出演",
     "watched": false,
-    "isManual": false
+    "isManual": false,
+    "members": [
+      "猪俣周杜"
+    ]
   },
   {
     "id": "thetv-program-0001072766-2-1776254400000",
@@ -167,7 +243,10 @@
     "category": "ドラマ",
     "role": "出演",
     "watched": false,
-    "isManual": false
+    "isManual": false,
+    "members": [
+      "佐藤勝利"
+    ]
   },
   {
     "id": "thetv-program-0000810732-575-1776264960000",
@@ -177,7 +256,10 @@
     "category": "バラエティー",
     "role": "出演",
     "watched": false,
-    "isManual": false
+    "isManual": false,
+    "members": [
+      "菊池風磨"
+    ]
   },
   {
     "id": "thetv-program-0001037133-123-1776266100000",
@@ -187,7 +269,10 @@
     "category": "バラエティー",
     "role": "司会",
     "watched": false,
-    "isManual": false
+    "isManual": false,
+    "members": [
+      "菊池風磨"
+    ]
   },
   {
     "id": "thetv-program-0000945816-331-1776266100000",
@@ -197,7 +282,10 @@
     "category": "バラエティー",
     "role": "ゲスト",
     "watched": false,
-    "isManual": false
+    "isManual": false,
+    "members": [
+      "橋本将生"
+    ]
   },
   {
     "id": "thetv-program-0001060543-45-1776268500000",
@@ -207,7 +295,18 @@
     "category": "バラエティー",
     "role": "出演",
     "watched": false,
-    "isManual": false
+    "isManual": false,
+    "members": [
+      "timelesz",
+      "佐藤勝利",
+      "菊池風磨",
+      "松島聡",
+      "寺西拓人",
+      "原嘉孝",
+      "橋本将生",
+      "猪俣周杜",
+      "篠塚大輝"
+    ]
   },
   {
     "id": "thetv-program-0001061146-33-1776313260000",
@@ -217,7 +316,10 @@
     "category": "バラエティー",
     "role": "出演",
     "watched": false,
-    "isManual": false
+    "isManual": false,
+    "members": [
+      "猪俣周杜"
+    ]
   },
   {
     "id": "thetv-program-0001072293-1-1776333600000",
@@ -227,7 +329,18 @@
     "category": "音楽",
     "role": "出演",
     "watched": false,
-    "isManual": false
+    "isManual": false,
+    "members": [
+      "timelesz",
+      "佐藤勝利",
+      "菊池風磨",
+      "松島聡",
+      "寺西拓人",
+      "原嘉孝",
+      "橋本将生",
+      "猪俣周杜",
+      "篠塚大輝"
+    ]
   },
   {
     "id": "thetv-program-0001060543-51-1776427200000",
@@ -237,7 +350,18 @@
     "category": "バラエティー",
     "role": "出演",
     "watched": false,
-    "isManual": false
+    "isManual": false,
+    "members": [
+      "timelesz",
+      "佐藤勝利",
+      "菊池風磨",
+      "松島聡",
+      "寺西拓人",
+      "原嘉孝",
+      "橋本将生",
+      "猪俣周杜",
+      "篠塚大輝"
+    ]
   },
   {
     "id": "thetv-program-0000805431-1027-1776443400000",
@@ -247,7 +371,10 @@
     "category": "バラエティー",
     "role": "出演",
     "watched": false,
-    "isManual": false
+    "isManual": false,
+    "members": [
+      "原嘉孝"
+    ]
   },
   {
     "id": "thetv-program-0000948412-124-1776448800000",
@@ -257,7 +384,10 @@
     "category": "バラエティー",
     "role": "出演",
     "watched": false,
-    "isManual": false
+    "isManual": false,
+    "members": [
+      "菊池風磨"
+    ]
   },
   {
     "id": "thetv-program-0001016083-95-1776450840000",
@@ -267,7 +397,10 @@
     "category": "バラエティー",
     "role": "ゲスト",
     "watched": false,
-    "isManual": false
+    "isManual": false,
+    "members": [
+      "橋本将生"
+    ]
   },
   {
     "id": "thetv-program-0001060543-50-1776456000000",
@@ -277,7 +410,17 @@
     "category": "バラエティー",
     "role": "出演",
     "watched": false,
-    "isManual": false
+    "isManual": false,
+    "members": [
+      "timelesz",
+      "佐藤勝利",
+      "松島聡",
+      "寺西拓人",
+      "原嘉孝",
+      "橋本将生",
+      "猪俣周杜",
+      "篠塚大輝"
+    ]
   },
   {
     "id": "thetv-program-0001071015-6-1776470400000",
@@ -287,7 +430,18 @@
     "category": "ドラマ",
     "role": "主題歌",
     "watched": false,
-    "isManual": false
+    "isManual": false,
+    "members": [
+      "timelesz",
+      "佐藤勝利",
+      "菊池風磨",
+      "松島聡",
+      "寺西拓人",
+      "原嘉孝",
+      "橋本将生",
+      "猪俣周杜",
+      "篠塚大輝"
+    ]
   },
   {
     "id": "thetv-program-0001037133-118-1776475500000",
@@ -297,7 +451,10 @@
     "category": "バラエティー",
     "role": "司会",
     "watched": false,
-    "isManual": false
+    "isManual": false,
+    "members": [
+      "菊池風磨"
+    ]
   },
   {
     "id": "thetv-program-0000999386-216-1776477000000",
@@ -307,7 +464,10 @@
     "category": "バラエティー",
     "role": "ゲスト",
     "watched": false,
-    "isManual": false
+    "isManual": false,
+    "members": [
+      "佐藤勝利"
+    ]
   },
   {
     "id": "thetv-program-0001061146-30-1776477600000",
@@ -317,7 +477,10 @@
     "category": "バラエティー",
     "role": "出演",
     "watched": false,
-    "isManual": false
+    "isManual": false,
+    "members": [
+      "猪俣周杜"
+    ]
   },
   {
     "id": "thetv-program-0001071015-7-1776517200000",
@@ -327,7 +490,17 @@
     "category": "ドラマ",
     "role": "主題歌",
     "watched": false,
-    "isManual": false
+    "isManual": false,
+    "members": [
+      "timelesz",
+      "佐藤勝利",
+      "松島聡",
+      "寺西拓人",
+      "原嘉孝",
+      "橋本将生",
+      "猪俣周杜",
+      "篠塚大輝"
+    ]
   },
   {
     "id": "thetv-program-0000913596-300-1776531240000",
@@ -337,7 +510,11 @@
     "category": "バラエティー",
     "role": "ゲスト",
     "watched": false,
-    "isManual": false
+    "isManual": false,
+    "members": [
+      "猪俣周杜",
+      "篠塚大輝"
+    ]
   },
   {
     "id": "thetv-program-0001065970-25-1776531600000",
@@ -347,7 +524,17 @@
     "category": "バラエティー",
     "role": "出演",
     "watched": false,
-    "isManual": false
+    "isManual": false,
+    "members": [
+      "timelesz",
+      "佐藤勝利",
+      "松島聡",
+      "寺西拓人",
+      "原嘉孝",
+      "橋本将生",
+      "猪俣周杜",
+      "篠塚大輝"
+    ]
   },
   {
     "id": "thetv-program-0001061146-22-1776562200000",
@@ -357,7 +544,10 @@
     "category": "バラエティー",
     "role": "出演",
     "watched": false,
-    "isManual": false
+    "isManual": false,
+    "members": [
+      "猪俣周杜"
+    ]
   },
   {
     "id": "thetv-program-0000849597-523-1776653700000",
@@ -367,7 +557,11 @@
     "category": "情報・ワイドショー",
     "role": "出演",
     "watched": false,
-    "isManual": false
+    "isManual": false,
+    "members": [
+      "橋本将生",
+      "猪俣周杜"
+    ]
   },
   {
     "id": "thetv-program-0001037109-114-1776658800000",
@@ -377,7 +571,16 @@
     "category": "バラエティー",
     "role": "その他",
     "watched": false,
-    "isManual": false
+    "isManual": false,
+    "members": [
+      "timelesz",
+      "佐藤勝利",
+      "松島聡",
+      "寺西拓人",
+      "原嘉孝",
+      "橋本将生",
+      "篠塚大輝"
+    ]
   },
   {
     "id": "thetv-program-0001057944-1-1776659280000",
@@ -387,7 +590,10 @@
     "category": "ドラマ",
     "role": "出演",
     "watched": false,
-    "isManual": false
+    "isManual": false,
+    "members": [
+      "佐藤勝利"
+    ]
   },
   {
     "id": "thetv-program-0001037780-112-1776659400000",
@@ -397,7 +603,11 @@
     "category": "バラエティー",
     "role": "出演",
     "watched": false,
-    "isManual": false
+    "isManual": false,
+    "members": [
+      "佐藤勝利",
+      "原嘉孝"
+    ]
   },
   {
     "id": "thetv-program-0000979177-176-1776679200000",
@@ -407,7 +617,17 @@
     "category": "音楽",
     "role": "出演",
     "watched": false,
-    "isManual": false
+    "isManual": false,
+    "members": [
+      "timelesz",
+      "佐藤勝利",
+      "松島聡",
+      "寺西拓人",
+      "原嘉孝",
+      "橋本将生",
+      "猪俣周杜",
+      "篠塚大輝"
+    ]
   },
   {
     "id": "thetv-program-0001059255-1-1776700740000",
@@ -417,7 +637,10 @@
     "category": "バラエティー",
     "role": "出演",
     "watched": false,
-    "isManual": false
+    "isManual": false,
+    "members": [
+      "松島聡"
+    ]
   },
   {
     "id": "thetv-program-0001060543-31-1776744600000",
@@ -427,7 +650,15 @@
     "category": "バラエティー",
     "role": "出演",
     "watched": false,
-    "isManual": false
+    "isManual": false,
+    "members": [
+      "timelesz",
+      "松島聡",
+      "寺西拓人",
+      "原嘉孝",
+      "橋本将生",
+      "篠塚大輝"
+    ]
   },
   {
     "id": "thetv-program-0000805434-1038-1776772800000",
@@ -437,7 +668,10 @@
     "category": "バラエティー",
     "role": "出演",
     "watched": false,
-    "isManual": false
+    "isManual": false,
+    "members": [
+      "松島聡"
+    ]
   },
   {
     "id": "thetv-program-0001037133-110-1776784500000",
@@ -447,7 +681,10 @@
     "category": "バラエティー",
     "role": "ゲスト",
     "watched": false,
-    "isManual": false
+    "isManual": false,
+    "members": [
+      "橋本将生"
+    ]
   },
   {
     "id": "thetv-program-0001064624-2-1776831840000",
@@ -457,7 +694,10 @@
     "category": "バラエティー",
     "role": "出演",
     "watched": false,
-    "isManual": false
+    "isManual": false,
+    "members": [
+      "寺西拓人"
+    ]
   },
   {
     "id": "thetv-program-0001060543-46-1776873300000",
@@ -467,6 +707,12 @@
     "category": "バラエティー",
     "role": "出演",
     "watched": false,
-    "isManual": false
+    "isManual": false,
+    "members": [
+      "timelesz",
+      "寺西拓人",
+      "原嘉孝",
+      "篠塚大輝"
+    ]
   }
 ]

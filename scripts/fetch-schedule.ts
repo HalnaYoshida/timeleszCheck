@@ -38,6 +38,7 @@ interface TvAppearance {
   role: string
   watched: boolean
   isManual: boolean
+  members: string[]
 }
 
 function resolveHour(prefix: string, hour: number): number {
@@ -81,7 +82,7 @@ function parseHtmlToAppearances(html: string): TvAppearance[] {
     if (!date) continue
 
     const id = `thetv-${href.replace(/\//g, '-').replace(/^-|-$/g, '')}-${date.getTime()}`
-    appearances.push({ id, title, channel, datetime: date.toISOString(), category, role, watched: false, isManual: false })
+    appearances.push({ id, title, channel, datetime: date.toISOString(), category, role, watched: false, isManual: false, members: [] })
   }
   return appearances
 }
@@ -103,24 +104,29 @@ async function main() {
     FETCH_TARGETS.map(({ personId, label }) => fetchPerson(personId, label))
   )
 
-  // ID でデデュープ（グループが先頭なので優先される）
-  const seen = new Set<string>()
-  const merged: TvAppearance[] = []
+  // ID ごとに members を蓄積しながらデデュープ
+  const accumulator = new Map<string, { item: TvAppearance; members: Set<string> }>()
 
-  for (const result of results) {
+  for (let i = 0; i < results.length; i++) {
+    const result = results[i]
     if (result.status === 'rejected') {
-      console.warn('  スキップ:', result.reason)
+      console.warn('  スキップ:', (result as PromiseRejectedResult).reason)
       continue
     }
+    const label = FETCH_TARGETS[i].label
     for (const item of result.value) {
-      if (!seen.has(item.id)) {
-        seen.add(item.id)
-        merged.push(item)
+      const existing = accumulator.get(item.id)
+      if (!existing) {
+        accumulator.set(item.id, { item, members: new Set([label]) })
+      } else {
+        existing.members.add(label)
       }
     }
   }
 
-  merged.sort((a, b) => new Date(a.datetime).getTime() - new Date(b.datetime).getTime())
+  const merged = [...accumulator.values()]
+    .map(({ item, members }) => ({ ...item, members: [...members] }))
+    .sort((a, b) => new Date(a.datetime).getTime() - new Date(b.datetime).getTime())
 
   console.log(`合計 ${merged.length} 件（重複除去後）`)
   mkdirSync(join(__dirname, '..', 'public'), { recursive: true })

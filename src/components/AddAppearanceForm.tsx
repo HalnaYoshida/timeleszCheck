@@ -18,7 +18,7 @@ export function AddAppearanceForm({ onAdd, onClose }: AddAppearanceFormProps) {
     if (!title.trim() || !date || !time) return
 
     const datetime = new Date(`${date}T${time}:00`).toISOString()
-    onAdd({ title: title.trim(), channel: channel.trim(), datetime, category, role: '出演' })
+    onAdd({ title: title.trim(), channel: channel.trim(), datetime, category, role: '出演', members: [] })
     onClose()
   }
 
