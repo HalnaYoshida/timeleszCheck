@@ -8,7 +8,7 @@ import { useAuth } from './hooks/useAuth'
 import './styles/index.css'
 
 export default function App() {
-  const { user, authLoading, signIn, signInWithGoogle, signInWithTwitter, signOut } = useAuth()
+  const { user, authLoading, signUp, signIn, signInWithGoogle, signInWithTwitter, signOut } = useAuth()
 
   if (authLoading) {
     return <div className="auth-loading">読み込み中...</div>
@@ -18,6 +18,7 @@ export default function App() {
     return (
       <AuthForm
         onSignIn={signIn}
+        onSignUp={signUp}
         onSignInWithGoogle={signInWithGoogle}
         onSignInWithTwitter={signInWithTwitter}
       />

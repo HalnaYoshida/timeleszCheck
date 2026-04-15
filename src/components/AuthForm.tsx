@@ -4,14 +4,17 @@ interface AuthFormProps {
   onSignInWithGoogle: () => Promise<void>
   onSignInWithTwitter: () => Promise<void>
   onSignIn: (email: string, password: string) => Promise<void>
+  onSignUp: (email: string, password: string) => Promise<void>
 }
 
-export function AuthForm({ onSignInWithGoogle, onSignInWithTwitter, onSignIn }: AuthFormProps) {
+export function AuthForm({ onSignInWithGoogle, onSignInWithTwitter, onSignIn, onSignUp }: AuthFormProps) {
   const [showEmail, setShowEmail] = useState(false)
+  const [isSignUp, setIsSignUp] = useState(false)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState<string | null>(null)
   const [error, setError] = useState<string | null>(null)
+  const [signUpDone, setSignUpDone] = useState(false)
 
   const handleOAuth = async (provider: 'google' | 'twitter') => {
     setError(null)
@@ -30,7 +33,12 @@ export function AuthForm({ onSignInWithGoogle, onSignInWithTwitter, onSignIn }: 
     setError(null)
     setLoading('email')
     try {
-      await onSignIn(email, password)
+      if (isSignUp) {
+        await onSignUp(email, password)
+        setSignUpDone(true)
+      } else {
+        await onSignIn(email, password)
+      }
     } catch (err) {
       setError(err instanceof Error ? translateError(err.message) : 'ログインに失敗しました')
       setLoading(null)
@@ -76,8 +84,13 @@ export function AuthForm({ onSignInWithGoogle, onSignInWithTwitter, onSignIn }: 
             className="auth-toggle-btn auth-email-toggle"
             onClick={() => setShowEmail(true)}
           >
-            メールアドレスでログイン
+            メールアドレスでログイン / 新規登録
           </button>
+        ) : signUpDone ? (
+          <div className="auth-success">
+            <p>確認メールを送信しました。</p>
+            <p>メール内のリンクをクリックしてログインしてください。</p>
+          </div>
         ) : (
           <form onSubmit={handleEmailSubmit} className="form">
             <div className="form-group">
@@ -100,7 +113,7 @@ export function AuthForm({ onSignInWithGoogle, onSignInWithTwitter, onSignIn }: 
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
-                autoComplete="current-password"
+                autoComplete={isSignUp ? 'new-password' : 'current-password'}
               />
             </div>
             <button
@@ -108,8 +121,18 @@ export function AuthForm({ onSignInWithGoogle, onSignInWithTwitter, onSignIn }: 
               className="btn btn-primary auth-submit"
               disabled={loading !== null}
             >
-              {loading === 'email' ? '処理中...' : 'ログイン'}
+              {loading === 'email' ? '処理中...' : isSignUp ? '新規登録' : 'ログイン'}
             </button>
+            <p className="auth-toggle">
+              {isSignUp ? 'すでにアカウントをお持ちの方は' : 'アカウントをお持ちでない方は'}
+              <button
+                type="button"
+                className="auth-toggle-btn"
+                onClick={() => { setIsSignUp(!isSignUp); setError(null) }}
+              >
+                {isSignUp ? 'ログイン' : '新規登録'}
+              </button>
+            </p>
           </form>
         )}
       </div>
