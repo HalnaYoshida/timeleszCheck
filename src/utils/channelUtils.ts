@@ -29,9 +29,10 @@ const KANTO_TERRESTRIAL_CHANNELS = new Set([
 export function isKantoTerrestrial(channel: string): boolean {
   // 完全一致
   if (KANTO_TERRESTRIAL_CHANNELS.has(channel)) return true
-  // 部分一致（"日本テレビ系"など表記ゆれに対応）
+  // 部分一致：channel がホワイトリストのキーワードを含む場合のみ許可
+  // （逆方向 ch.includes(channel) は短い文字列が非関東局にマッチするため除外）
   for (const ch of KANTO_TERRESTRIAL_CHANNELS) {
-    if (channel.includes(ch) || ch.includes(channel)) return true
+    if (channel.includes(ch)) return true
   }
   return false
 }
