@@ -121,10 +121,14 @@ export function useAppearances(userId: string) {
     [userId]
   )
 
-  /** フィルタ適用（手動追加分はスルー） */
+  /** フィルタ適用（手動追加分はスルー）
+   * filterKanto と filterTerrestrial はどちらも「関東地上波に絞る」フィルタ。
+   * どちらか一方でも ON なら isKantoTerrestrial で絞り込む。
+   */
   const applyFilter = useCallback(
     (items: TvAppearance[]): TvAppearance[] => {
-      if (!filterKanto && !filterTerrestrial) return items
+      const shouldFilter = filterKanto || filterTerrestrial
+      if (!shouldFilter) return items
       return items.filter((a) => a.isManual || isKantoTerrestrial(a.channel))
     },
     [filterKanto, filterTerrestrial]

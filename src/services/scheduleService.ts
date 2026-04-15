@@ -40,10 +40,13 @@ function parseThetvHtml(html: string): TvAppearance[] {
     const title = li.querySelector('p.item-text')?.textContent?.trim() ?? ''
     const scheduleText = li.querySelector('p.item-schedule')?.textContent?.trim() ?? ''
     const role = li.querySelector('p.item-sub')?.textContent?.trim() ?? '出演'
-    const category = li.querySelector('.label__block')?.textContent?.trim() ?? ''
+    // "今日放送バラエティー" → "バラエティー" のように時制プレフィックスを除去
+    const rawCategory = li.querySelector('.label__block')?.textContent?.trim() ?? ''
+    const category = rawCategory.replace(/^(今日|明日|昨日|今週|来週|再来週)放送/, '').trim()
     const href = li.querySelector('a[href^="/program/"]')?.getAttribute('href') ?? ''
 
-    if (!title || !scheduleText) return
+    // href が取れない場合は ID が衝突するのでスキップ
+    if (!title || !scheduleText || !href) return
 
     const parts = scheduleText.split('／')
     const datepart = parts[0]?.trim() ?? ''
@@ -105,11 +108,13 @@ async function fetchAllFromProxy(): Promise<TvAppearance[]> {
 
 /**
  * public/schedule.json から取得する（本番 / npm run fetch 生成済み）
+ * 旧バージョンとの互換性のため members フィールドを補完する
  */
 async function fetchFromJson(): Promise<TvAppearance[]> {
   const res = await fetch('/schedule.json')
   if (!res.ok) throw new Error(`schedule.json not found: ${res.status}`)
-  return res.json() as Promise<TvAppearance[]>
+  const data = await res.json() as TvAppearance[]
+  return data.map((item) => ({ ...item, members: item.members ?? [] }))
 }
 
 /**
