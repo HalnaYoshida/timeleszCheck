@@ -12,6 +12,15 @@ import type { TvAppearance } from '../types'
 import { isToday, isFuture, isPast } from '../utils/dateUtils'
 import { isKantoTerrestrial } from '../utils/channelUtils'
 
+/** Error / PostgrestError / unknown を統一的にメッセージ化する */
+function extractMessage(e: unknown): string {
+  if (e instanceof Error) return e.message
+  if (typeof e === 'object' && e !== null && 'message' in e) {
+    return String((e as { message: unknown }).message)
+  }
+  return String(e)
+}
+
 export function useAppearances(userId: string) {
   const [appearances, setAppearances] = useState<TvAppearance[]>([])
   const [loading, setLoading] = useState(false)
@@ -27,7 +36,7 @@ export function useAppearances(userId: string) {
     setLoading(true)
     loadAppearances(userId)
       .then(setAppearances)
-      .catch((e: unknown) => setError(e instanceof Error ? e.message : '読み込み失敗'))
+      .catch((e: unknown) => setError(extractMessage(e)))
       .finally(() => setLoading(false))
   }, [userId])
 
@@ -62,7 +71,7 @@ export function useAppearances(userId: string) {
       setAppearances(final)
       setLastFetched(new Date().toISOString())
     } catch (e) {
-      setError(e instanceof Error ? e.message : '取得に失敗しました')
+      setError(extractMessage(e))
     } finally {
       setLoading(false)
     }
@@ -81,7 +90,7 @@ export function useAppearances(userId: string) {
       } catch (e) {
         // 失敗したらロールバック
         setAppearances((prev) => prev.map((a) => (a.id === id ? { ...a, watched: !next } : a)))
-        setError(e instanceof Error ? e.message : '更新に失敗しました')
+        setError(extractMessage(e))
       }
     },
     [appearances, userId]
@@ -115,7 +124,7 @@ export function useAppearances(userId: string) {
       } catch (e) {
         // 失敗したらロールバック（再取得）
         loadAppearances(userId).then(setAppearances)
-        setError(e instanceof Error ? e.message : '削除に失敗しました')
+        setError(extractMessage(e))
       }
     },
     [userId]

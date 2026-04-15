@@ -326,17 +326,6 @@ body {
   letter-spacing: 0.02em;
 }
 
-.member-chip--group {
-  background: rgba(124, 106, 247, 0.15);
-  color: var(--color-primary);
-  border: 1px solid rgba(124, 106, 247, 0.3);
-}
-
-.member-chip--solo {
-  background: rgba(106, 247, 184, 0.12);
-  color: #6af7b8;
-  border: 1px solid rgba(106, 247, 184, 0.25);
-}
 
 .card--watched .member-chip {
   opacity: 0.4;

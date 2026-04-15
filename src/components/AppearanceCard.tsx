@@ -7,24 +7,26 @@ interface AppearanceCardProps {
   onRemove?: (id: string) => void
 }
 
-/** 表示名の略称マッピング */
-const MEMBER_SHORT: Record<string, string> = {
-  'timelesz': 'グループ',
-  '佐藤勝利': '勝利',
-  '菊池風磨': '風磨',
-  '松島聡':   '聡',
-  '寺西拓人': '拓人',
-  '原嘉孝':   '嘉孝',
-  '橋本将生': '将生',
-  '猪俣周杜': '周杜',
-  '篠塚大輝': '大輝',
+/** メンバーごとのチップカラー定義 */
+const MEMBER_COLORS: Record<string, { bg: string; text: string; border: string }> = {
+  'timelesz': { bg: 'rgba(124, 106, 247, 0.15)', text: '#a090ff', border: 'rgba(124, 106, 247, 0.35)' },
+  '佐藤勝利': { bg: 'rgba(255, 80,  80,  0.15)', text: '#ff6b6b', border: 'rgba(255, 80,  80,  0.35)' },
+  '菊池風磨': { bg: 'rgba(160, 90,  240, 0.15)', text: '#b06af7', border: 'rgba(160, 90,  240, 0.35)' },
+  '松島聡':   { bg: 'rgba(60,  200, 100, 0.15)', text: '#4dd87a', border: 'rgba(60,  200, 100, 0.35)' },
+  '原嘉孝':   { bg: 'rgba(150, 230, 60,  0.15)', text: '#a0e040', border: 'rgba(150, 230, 60,  0.35)' },
+  '寺西拓人': { bg: 'rgba(80,  190, 255, 0.15)', text: '#64beff', border: 'rgba(80,  190, 255, 0.35)' },
+  '橋本将生': { bg: 'rgba(255, 100, 160, 0.15)', text: '#ff70b0', border: 'rgba(255, 100, 160, 0.35)' },
+  '猪俣周杜': { bg: 'rgba(255, 215, 50,  0.15)', text: '#ffd700', border: 'rgba(255, 215, 50,  0.35)' },
+  '篠塚大輝': { bg: 'rgba(220, 220, 220, 0.12)', text: '#d8d8d8', border: 'rgba(220, 220, 220, 0.35)' },
 }
 
-/** グループ出演なら ['グループ'] のみ、個人出演ならメンバー名一覧を返す */
-function resolveDisplayMembers(members: string[]): string[] {
+const DEFAULT_COLOR = { bg: 'rgba(136, 136, 160, 0.15)', text: '#8888a0', border: 'rgba(136, 136, 160, 0.3)' }
+
+/** グループ出演なら 'timelesz' キーのまま、個人出演はフルネームで返す */
+function resolveDisplayMembers(members: string[]): Array<{ label: string; colorKey: string }> {
   if (members.length === 0) return []
-  if (members.includes('timelesz')) return ['グループ']
-  return members.map((m) => MEMBER_SHORT[m] ?? m)
+  if (members.includes('timelesz')) return [{ label: 'グループ', colorKey: 'timelesz' }]
+  return members.map((m) => ({ label: m, colorKey: m }))
 }
 
 export function AppearanceCard({ item, onToggle, onRemove }: AppearanceCardProps) {
@@ -54,14 +56,18 @@ export function AppearanceCard({ item, onToggle, onRemove }: AppearanceCardProps
         </div>
         {displayMembers.length > 0 && (
           <div className="card-members">
-            {displayMembers.map((name) => (
-              <span
-                key={name}
-                className={`member-chip ${name === 'グループ' ? 'member-chip--group' : 'member-chip--solo'}`}
-              >
-                {name}
-              </span>
-            ))}
+            {displayMembers.map(({ label, colorKey }) => {
+              const c = MEMBER_COLORS[colorKey] ?? DEFAULT_COLOR
+              return (
+                <span
+                  key={colorKey}
+                  className="member-chip"
+                  style={{ background: c.bg, color: c.text, border: `1px solid ${c.border}` }}
+                >
+                  {label}
+                </span>
+              )
+            })}
           </div>
         )}
       </div>
